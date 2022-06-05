@@ -5,7 +5,7 @@ fn main() {
     println!("--------------------");
     
     // 現在高度を入力
-    println!("enter current altitude");
+    println!("enter current altitude(FL)");
     let mut current_alt = String::new();
 
     // 現在高度の処理
@@ -14,7 +14,7 @@ fn main() {
         .expect("Failed to read line");
 
     // 降下目標高度を入力
-    println!("enter target altitude");
+    println!("enter target altitude(FL)");
     let mut target_alt = String::new();
 
     // 降下目標高度の処理
@@ -29,21 +29,17 @@ fn main() {
 
     let current_alt_num: f32 = current_alt.parse().unwrap();
     let target_alt_num: f32 = target_alt.parse().unwrap();
-
-
-    // デバッグ用
-    println!("current altitude is {}",current_alt_num);
-    println!("target altitude is {}",target_alt_num);
-
     
     // 降下に必要な距離の計算
-    //let current_alt_num = current_alt_num * 100.0;
-    //let target_alt_num = target_alt_num * 100.0;
     let pi = PI;
     let result = ((current_alt_num * 100.0) - (target_alt_num * 100.0)) / (3.0 * (pi / 180.0)).tan() / 6076.0;
 
+    //結果の表示
+    println!("--------------------");
+    let result = (result * 10.0).round() / 10.0;
     println!("required {} nm", result);
-    
 
-    //Math.round(   ( | (Number(Number(cra.value)*100-Number(toa.value)*100) | / Math.tan( Number(pas.value)*(Math.PI / 180) )))/6076   ) + " nm"; //結果を表示(必要距離)
+    let difference = (current_alt_num - target_alt_num) * 100.0;
+    println!("difference {} ft",difference);
+    println!("--------------------");
 }
