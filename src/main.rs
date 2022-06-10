@@ -27,19 +27,18 @@ fn main() {
     let current_alt = current_alt.trim();
     let target_alt = target_alt.trim();
 
-    let current_alt_num: f32 = current_alt.parse().unwrap();
-    let target_alt_num: f32 = target_alt.parse().unwrap();
+    let current_alt: f32 = current_alt.parse().unwrap();
+    let target_alt: f32 = target_alt.parse().unwrap();
     
     // 降下に必要な距離の計算
-    let pi = PI;
-    let result = ((current_alt_num * 100.0) - (target_alt_num * 100.0)) / (3.0 * (pi / 180.0)).tan() / 6076.0;
+    let result = ((current_alt * 100.0) - (target_alt * 100.0)) / (3.0 * (PI / 180.0)).tan() / 6076.0;
 
     //結果の表示
     println!("--------------------");
     let result = (result * 10.0).round() / 10.0;
     println!("required {} nm", result);
 
-    let difference = (current_alt_num - target_alt_num) * 100.0;
+    let difference = (current_alt - target_alt) * 100.0;
     println!("difference {} ft",difference);
     println!("--------------------");
 }
